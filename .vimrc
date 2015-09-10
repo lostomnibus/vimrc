@@ -69,9 +69,6 @@ nnoremap <c-k> <c-w>k
 
 " clear search highlighting
 nnoremap <Leader>? :let @/=''<cr>
-nnoremap <Leader>gs :Gstatus<cr>
-nnoremap <Leader>gc :Gcommit<cr>
-nnoremap <Leader>gb :Gblame<cr>
 nnoremap <Leader>n :NERDTree<cr>
 nnoremap <Leader>N :NERDTreeClose<cr>
 nmap <leader>vv :vs $MYVIMRC<cr>
@@ -79,7 +76,8 @@ nmap <leader>vs :source $MYVIMRC<cr>
 nmap <leader>] :n<cr>
 nmap <leader>[ :p<cr>
 nmap <leader>ls :ls<cr>
-nmap <leader>T :SyntasticToggleMode<cr>
+nnoremap <leader>s :w<cr>
+nnoremap <leader>S :w<cr>
 nnoremap <leader>c( f(ci(
 nnoremap <leader>C( F(ci(
 nnoremap <leader>c{ f{ci{
@@ -149,6 +147,12 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
+" ==================================
+" Fugitive Plugin
+" ==================================
+nnoremap <Leader>gs :Gstatus<cr>
+nnoremap <Leader>gc :Gcommit<cr>
+nnoremap <Leader>gb :Gblame<cr>
 
 " ==================================
 " Syntastic Plugin
