@@ -10,6 +10,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'tpope/vim-speeddating'
+Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-jdaddy'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-commentary'
@@ -81,6 +82,10 @@ nmap <leader>vs :source $MYVIMRC<cr>
 
 nmap <leader>] :n<cr>
 nmap <leader>[ :p<cr>
+
+" insert lines below or above
+nnoremap <c-j> o<esc>k
+nnoremap <c-k> O<esc>j
 
 " save file
 nnoremap <leader>s :w<cr>
@@ -193,6 +198,8 @@ let g:airline_symbols.whitespace = 'Ξ'
 " Fugitive Plugin
 " ==================================
 nnoremap <leader>/ :Commentary<cr>
+vnoremap <leader>/ :Commentary<cr>
+
 
 " ==================================
 " Fugitive Plugin
