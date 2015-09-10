@@ -13,6 +13,7 @@ Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-jdaddy'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tomtom/tlib_vim'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'tmhedberg/matchit'
@@ -38,27 +39,31 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
 
 " Global Stuff
-filetype indent on
-filetype plugin on
+" filetype indent on
+" filetype plugin on
 set autoindent
 set backspace=indent,eol,start
 set clipboard=unnamedplus,unnamed,autoselect
 set completeopt-=preview
-set expandtab
-set hlsearch
+set expandtab " spaces instead of tab character
+set hlsearch " highlight search results
 set laststatus=2
+
+" display trailing white space as _
 set list
 set listchars=trail:_,tab:>>
-set number
+
+" no line number
+set nonumber
 set runtimepath^=~/.vim/bundle/node
 set shiftwidth=2
 set smartindent
 set tabstop=2
-set tw=140
+set tw=140 "text width 140 columns
+
+" set syntax
 syntax on
 
 " Window navigation
@@ -69,49 +74,87 @@ nnoremap <c-k> <c-w>k
 
 " clear search highlighting
 nnoremap <Leader>? :let @/=''<cr>
-nnoremap <Leader>n :NERDTree<cr>
-nnoremap <Leader>N :NERDTreeClose<cr>
+
+" vimrc edit/source
 nmap <leader>vv :vs $MYVIMRC<cr>
 nmap <leader>vs :source $MYVIMRC<cr>
+
 nmap <leader>] :n<cr>
 nmap <leader>[ :p<cr>
-nmap <leader>ls :ls<cr>
+
+" save file
 nnoremap <leader>s :w<cr>
 nnoremap <leader>S :w<cr>
+
+" easy leader commands to change inner parens
 nnoremap <leader>c( f(ci(
 nnoremap <leader>C( F(ci(
+
+" easy leader commands to change inner curly braces
 nnoremap <leader>c{ f{ci{
 nnoremap <leader>C{ F{ci{
+
+" easy leader commands to change inner single quotes
 nnoremap <leader>c' f'ci'
 nnoremap <leader>C' F'ci'
+
+" easy leader commands to change inner double quotes
 nnoremap <leader>c" f"ci"
 nnoremap <leader>C" F"ci"
+
+" easy leader commands to change inner brackets
 nnoremap <leader>c[ f[ci[
 nnoremap <leader>C[ F[ci[
+
+" easy leader commands to yank inner parens
 nnoremap <leader>y( f(yi(
 nnoremap <leader>Y( F(yi(
+
+" easy leader commands to yank inner curly braces
 nnoremap <leader>y{ f{yi{
 nnoremap <leader>Y{ F{yi{
+
+" easy leader commands to yank inner single quote
 nnoremap <leader>y' f'yi'
 nnoremap <leader>Y' F'yi'
+
+" easy leader commands to yank inner double quote
 nnoremap <leader>y" f"yi"
 nnoremap <leader>Y" F"yi"
+
+" easy leader commands to yank inner bracket
 nnoremap <leader>y[ f[yi[
 nnoremap <leader>Y[ F[yi[
+
+" easy leader commands to not func params
 nnoremap <leader>!  f(a!<esc>
 nnoremap <leader>!! F(a!<esc>
+
+" easy leader commands to delete inner params
 nnoremap <leader>d( f(di(
 nnoremap <leader>D( F(di(
+
+" easy leader commands to delete inner curly brace
 nnoremap <leader>d{ f{di{
 nnoremap <leader>D{ F{di{
+
+" easy leader commands to delete inner single quote
 nnoremap <leader>d' f'di'
 nnoremap <leader>D' F'di'
+
+" easy leader commands to delete inner double quote
 nnoremap <leader>d" f"di"
 nnoremap <leader>D" F"di"
+
+" easy leader commands to delete inner bracket
 nnoremap <leader>d[ f[di[
 nnoremap <leader>D[ F[di[
+
+" auto complete ending tag
 nnoremap <leader>> i</<c-x><c-o>
 iabbrev <// </<c-x><c-o>
+
+" movement in command mode
 cnoremap <c-h> <left>
 cnoremap <c-l> <right>
 " nmap gd :TernDef<cr>
@@ -124,7 +167,6 @@ nnoremap <Leader>F :Autoformat<cr><cr>
 " ==================================
 " Airline plugin
 " ==================================
-"
 let g:indentLine_color_term = 1
 let g:indentLine_char = '⋮'
 let g:ctrlp_custom_ignore = 'node_modules\|coverage\|public/vendor\|logs'
@@ -146,6 +188,11 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
+
+" ==================================
+" Fugitive Plugin
+" ==================================
+nnoremap <leader>/ :Commentary<cr>
 
 " ==================================
 " Fugitive Plugin
@@ -177,4 +224,10 @@ nmap     <C-F>p <Plug>CtrlSFPwordPath
 nnoremap <C-F>o :CtrlSFOpen<CR>
 nnoremap <C-F>t :CtrlSFToggle<CR>
 inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+
+" ==================================
+" NerdTree Plugin
+" ==================================
+nnoremap <Leader>n :NERDTreeToggle<cr>
+nnoremap <Leader>N :NERDTreeToggle<cr>
 
