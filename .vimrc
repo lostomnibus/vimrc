@@ -67,6 +67,12 @@ set tw=140 "text width 140 columns
 " set syntax
 syntax on
 
+nnoremap <up><up><down><down><left><right><left><right> iYOU ARE THE BEST PROGRAMMER EVER!!!!!<cr><esc>k:Commentary<cr>
+
+inoremap ( ()<left>
+inoremap { {}<left>
+inoremap [ []<left>
+
 " Window navigation
 nnoremap <c-l> <c-w>l
 nnoremap <c-j> <c-w>j
@@ -84,8 +90,6 @@ nmap <leader>] :n<cr>
 nmap <leader>[ :p<cr>
 
 " insert lines below or above
-nnoremap <c-j> o<esc>k
-nnoremap <c-k> O<esc>j
 
 " save file
 nnoremap <leader>s :w<cr>
