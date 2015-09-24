@@ -7,7 +7,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
+Plugin 'junegunn/vim-pseudocl'
+Plugin 'junegunn/vim-oblique'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-surround'
@@ -67,11 +68,12 @@ set tw=140 "text width 140 columns
 " set syntax
 syntax on
 
+cnoremap Q!<cr> q!<cr>
+cnoremap W<cr> w<cr>
+
 nnoremap <up><up><down><down><left><right><left><right> iYOU ARE THE BEST PROGRAMMER EVER!!!!!<cr><esc>k:Commentary<cr>
 
-inoremap ( ()<left>
-inoremap { {}<left>
-inoremap [ []<left>
+nnoremap A<cr> <nop>
 
 " Window navigation
 nnoremap <c-l> <c-w>l
@@ -241,4 +243,3 @@ inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 " ==================================
 nnoremap <Leader>n :NERDTreeToggle<cr>
 nnoremap <Leader>N :NERDTreeToggle<cr>
-
