@@ -12,7 +12,6 @@ Plugin 'junegunn/vim-oblique'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-jdaddy'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
@@ -23,9 +22,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'paranoida/vim-airlineish'
 Plugin 'pangloss/vim-javascript'
-Plugin 'moll/vim-node'
 Plugin 'mattn/emmet-vim'
-Plugin 'kien/ctrlp.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'groenewege/vim-less'
 Plugin 'godlygeek/tabular'
@@ -37,6 +34,10 @@ Plugin 'bling/vim-airline'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Yggdroot/indentLine'
 Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'moll/vim-node'
+Plugin 'kien/ctrlp.vim'
+Plugin 'joonty/vdebug'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -47,11 +48,16 @@ filetype plugin indent on    " required
 " filetype plugin on
 set autoindent
 set backspace=indent,eol,start
-set clipboard=unnamedplus,unnamed,autoselect
+" set clipboard=unnamedplus,unnamed,autoselect
 set completeopt-=preview
 set expandtab " spaces instead of tab character
-set hlsearch " highlight search results
+" set hlsearch " highlight search results
 set laststatus=2
+
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
 
 " display trailing white space as _
 set list
@@ -63,17 +69,18 @@ set runtimepath^=~/.vim/bundle/node
 set shiftwidth=2
 set smartindent
 set tabstop=2
-set tw=140 "text width 140 columns
 
 " set syntax
 syntax on
+" turn off syntax for diff files
+" if &diff
+"   syntax off
+" endif
 
+cnoremap Q<cr> q<cr>
 cnoremap Q!<cr> q!<cr>
 cnoremap W<cr> w<cr>
 
-nnoremap <up><up><down><down><left><right><left><right> iYOU ARE THE BEST PROGRAMMER EVER!!!!!<cr><esc>k:Commentary<cr>
-
-nnoremap A<cr> <nop>
 
 " Window navigation
 nnoremap <c-l> <c-w>l
@@ -88,7 +95,7 @@ nnoremap <Leader>? :let @/=''<cr>
 nmap <leader>vv :vs $MYVIMRC<cr>
 nmap <leader>vs :source $MYVIMRC<cr>
 
-nmap <leader>] :n<cr>
+nmap <leader>] :cn<cr>
 nmap <leader>[ :p<cr>
 
 " insert lines below or above
@@ -162,8 +169,8 @@ nnoremap <leader>d[ f[di[
 nnoremap <leader>D[ F[di[
 
 " auto complete ending tag
-nnoremap <leader>> i</<c-x><c-o>
-iabbrev <// </<c-x><c-o>
+nnoremap <leader>> i</<c-x><c-o><esc>o<esc>
+iabbrev <// </<c-x><c-o><esc>o<esc>
 
 " movement in command mode
 cnoremap <c-h> <left>
@@ -174,6 +181,7 @@ cnoremap <c-l> <right>
 " Autoformat plugin
 " ==================================
 nnoremap <Leader>F :Autoformat<cr><cr>
+" nnoremap <leader>F mm=}={'m
 
 " ==================================
 " Airline plugin
@@ -218,28 +226,36 @@ nnoremap <Leader>gb :Gblame<cr>
 " Syntastic Plugin
 " ==================================
 let g:airline_theme = 'airlineish'
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ,"trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected", "missing </a> before", "inserting implicit <span>", "replacing unexpected button by </button>", "missing </button" ]
 let g:syntastic_javascript_ignore_errors=["Redefinition of '_'"]
 
-" ==================================
-" CtrlSF Plugin
-" ==================================
-nmap     <C-F>f <Plug>CtrlSFPrompt
-vmap     <C-F>f <Plug>CtrlSFVwordPath
-vmap     <C-F>F <Plug>CtrlSFVwordExec
-nmap     <C-F>n <Plug>CtrlSFCwordPath
-nmap     <C-F>p <Plug>CtrlSFPwordPath
-nnoremap <C-F>o :CtrlSFOpen<CR>
-nnoremap <C-F>t :CtrlSFToggle<CR>
-inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+
 
 " ==================================
 " NerdTree Plugin
 " ==================================
 nnoremap <Leader>n :NERDTreeToggle<cr>
 nnoremap <Leader>N :NERDTreeToggle<cr>
+
+
+" ==================================
+" Custom VimScripts
+" ==================================
+source ~/.vim/scripts/case.vim
+
+nnoremap <Leader>cc :SnakeCaseToCamelCase<cr>
+nnoremap <Leader>sc :CamelCaseToSnakeCase<cr>
+
+nnoremap <leader>- yypVr-
+nnoremap <leader>= yypVr=
+
+nnoremap <leader>bz I- [BUG wyiwPa](https://dliralm.datahouse.com/plugins/tracker/?aid=A) 
+
+" set conceallevel=0
+" setlocal conceallevel=0
+au FileType json set conceallevel=0
